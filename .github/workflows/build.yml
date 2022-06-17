@@ -1,17 +1,11 @@
-
-# This workflow will build a Java project with Gradle
-# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
-
-name: Java CI with Gradle
-
+name: build
 on: [push]
-
 jobs:
     build:
         runs-on: ubuntu-latest
         strategy:
             matrix:
-                java: [11, 16]
+                java: [11, 17]
             fail-fast: true
         steps:
             - name: Checkout
@@ -32,9 +26,9 @@ jobs:
                   git config --global user.email "no-reply@github.com"
                   git config --global user.name "Github Actions"
             - name: Patch and build
-              run: ./elytraproxy build
+              run: ./susvelo build
             - name: Upload a build artifact
               uses: actions/upload-artifact@v2.2.4
               with:
-                name: ElytraProxy Built On ${{ matrix.java }} JDK
-                path: ElytraProxy-Build/proxy/build/libs/*-all.jar
+                name: susvelo JDK ${{ matrix.java }}
+                path: susvelo-build/proxy/build/libs/*-all.jar
